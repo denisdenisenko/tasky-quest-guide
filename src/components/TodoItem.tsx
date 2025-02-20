@@ -2,6 +2,7 @@
 import { Check, Trash } from "lucide-react";
 import { Todo } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { formatDistanceToNow } from "date-fns";
 
 interface TodoItemProps {
   todo: Todo;
@@ -29,14 +30,19 @@ const TodoItem = ({ todo, onToggle, onDelete }: TodoItemProps) => {
         >
           {todo.completed && <Check className="w-3 h-3" />}
         </button>
-        <span
-          className={cn(
-            "text-sm text-gray-900 transition-all duration-200 truncate",
-            todo.completed && "text-gray-500 line-through"
-          )}
-        >
-          {todo.text}
-        </span>
+        <div className="min-w-0 flex-1">
+          <span
+            className={cn(
+              "text-sm text-gray-900 transition-all duration-200 block truncate",
+              todo.completed && "text-gray-500 line-through"
+            )}
+          >
+            {todo.text}
+          </span>
+          <span className="text-xs text-gray-400 mt-0.5 block">
+            {formatDistanceToNow(todo.createdAt, { addSuffix: true })}
+          </span>
+        </div>
       </div>
       <button
         onClick={() => onDelete(todo.id)}
