@@ -13,15 +13,15 @@ const TodoItem = ({ todo, onToggle, onDelete }: TodoItemProps) => {
   return (
     <div
       className={cn(
-        "group flex items-center justify-between p-4 bg-white rounded-lg border transition-all duration-200 animate-slide-up hover:shadow-sm",
+        "group flex items-center justify-between p-3 sm:p-4 bg-white rounded-lg border transition-all duration-200 animate-slide-up hover:shadow-sm",
         todo.completed && "bg-gray-50"
       )}
     >
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 min-w-0 flex-1">
         <button
           onClick={() => onToggle(todo.id)}
           className={cn(
-            "w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors",
+            "flex-shrink-0 w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors",
             todo.completed
               ? "border-purple-500 bg-purple-500 text-white"
               : "border-gray-300 hover:border-purple-500"
@@ -31,7 +31,7 @@ const TodoItem = ({ todo, onToggle, onDelete }: TodoItemProps) => {
         </button>
         <span
           className={cn(
-            "text-sm text-gray-900 transition-all duration-200",
+            "text-sm text-gray-900 transition-all duration-200 truncate",
             todo.completed && "text-gray-500 line-through"
           )}
         >
@@ -40,7 +40,7 @@ const TodoItem = ({ todo, onToggle, onDelete }: TodoItemProps) => {
       </div>
       <button
         onClick={() => onDelete(todo.id)}
-        className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-2 hover:text-red-500"
+        className="flex-shrink-0 opacity-0 group-hover:opacity-100 sm:group-hover:opacity-100 transition-opacity duration-200 p-2 hover:text-red-500"
       >
         <Trash className="w-4 h-4" />
       </button>
